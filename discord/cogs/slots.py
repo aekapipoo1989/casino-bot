@@ -16,14 +16,14 @@ class Slots(commands.Cog):
 
     def check_bet(self, ctx: commands.Context, bet: int=DEFAULT_BET):
         bet = int(bet)
-        if bet <= 0 or bet > 3:
+        if bet <= 0 or bet > 100:
             raise commands.errors.BadArgument()
         current = self.economy.get_entry(ctx.author.id)[2]
         if bet > current:
             raise InsufficientFundsException(current, bet)
 
     @commands.command(
-        brief='Slot machine\nbet must be 1-3',
+        brief='Slot machine\nbet must be 1-100',
         usage='slots *[bet]'
     )
     async def slots(self, ctx: commands.Context, bet: int=1):
@@ -40,7 +40,7 @@ class Slots(commands.Cog):
         s2 = random.randint(1, items-1)
         s3 = random.randint(1, items-1)
 
-        win_rate = 12/100
+        win_rate = 98/100
 
         if random.random() < win_rate:
             symbols_weights = [3.5, 7, 15, 25, 55] # 
